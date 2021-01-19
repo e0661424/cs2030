@@ -1,0 +1,4 @@
+Class Circle{
+  private double x = 0;
+
+}
