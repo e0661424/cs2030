@@ -53,23 +53,20 @@ class Point{
     int midpt=(int)Math.floor(length/2);
 
     for (int i =0;i<length;i++){
-      if (i==midpt){
-        for(int j=0;j<length;j++){
-          if(j==midpt){
-            System.out.print("-|");  
-          }else{
+
+      for (int j=0;j<length;j++){
+        if (i==this.y && (j-midpt)==this.x){
+            System.out.print(" *");
+        }else if(i==midpt){
             System.out.print("--");
-          }
+        }else if(j==midpt){
+            System.out.print(" |");
+        }else{
+            System.out.print("  ");
         }
-      }else{
-         for(int j=0;j<length;j++){
-          if(j==midpt){
-            System.out.print("*|");  
-          }else{
-            System.out.print("**");
-          }
-        }
-      }
+
+
+      }  
       System.out.print("\n");
     }
  }
