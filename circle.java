@@ -55,11 +55,19 @@ class Point{
     for (int i =0;i<length;i++){
       if (i==midpt){
         for(int j=0;j<length;j++){
-          System.out.print("--");
+          if(j==midpt){
+            System.out.print("-|");  
+          }else{
+            System.out.print("--");
+          }
         }
       }else{
-        for(int j=0;j<length;j++){
-          System.out.print(" *");
+         for(int j=0;j<length;j++){
+          if(j==midpt){
+            System.out.print("*|");  
+          }else{
+            System.out.print("**");
+          }
         }
       }
       System.out.print("\n");
