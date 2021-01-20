@@ -7,7 +7,7 @@ public class Circle{
   
   static int last_id=0;
 
-  // Constructors
+  // ---------------Constructors--------
   public Circle(){
     this.r = 0;
     this.x = 0;
@@ -29,22 +29,28 @@ public class Circle{
     this.id = last_id;
     last_id ++;
   }
+  //////////////////////////////////////
+
+
   // Methods
-  public double getarea(){
+  public double getArea(){
     return r*r*PI;
   } 
-  public double getx(){
+  public double getX(){
     return this.x;
   }
-  public double gety(){
+  public double getY(){
     return this.y;
   }
+  //////////////////////////////////////
+
 }
 
 public class Point{
   private double x;
   private double y;
-
+ 
+  // ----------Constructors-----------
   public Point(){
   // null point
   }
@@ -53,20 +59,27 @@ public class Point{
     this.x=x;
     this.y=y;
   }
+  ////////////////////////////////////
 
-  public double getx(){
+
+  // ------------Methods--------------
+  public double getX(){
     return this.x;
   }
 
-  public double gety(){
+  public double getY(){
     return this.y;
   }
 
-  public void setx(double x){
+  public Point setx(double x){
       this.x=x;
+      return this;
   }
 
-  public void sety(double y){
+  public Point sety(double y){
       this.y=y;
+      return this;
   }
+
+  //////////////////////////////////////
 }
