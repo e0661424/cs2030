@@ -5,7 +5,7 @@
  * The Circle class represents a circle with a center 
  * and a radius.
  *
- * @author XXX 
+ * @author Alex Teo 
  */
 class Circle {
   /** The center of the circle. */
@@ -33,8 +33,11 @@ class Circle {
    * @return true if p is within this circle; false otherwise.
    */
   public boolean contains(Point p) {
-    // TODO
-    return false;
+    boolean result = false;
+    
+    // result = (Math.pow(r,2) == Math.pow((c.getX()-p.getX()),2) + Math.pow((c.getY()-p.getY()),2));
+
+    return (Math.pow(r,2) >= Math.pow((c.getX()-p.getX()),2) + Math.pow((c.getY()-p.getY()),2));
   }
 
   /**

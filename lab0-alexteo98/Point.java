@@ -4,8 +4,38 @@
  *
  * The Point class encapsulates a point on a 2D plane.
  *
- * @author XXX
+ * @author Alex Teo
  */
 class Point {
-  // TODO
+  
+  private double x = 0;
+  private double y = 0;
+
+  public Point(double x, double y){
+    this.x = x;
+    this.y = y;
+  }
+
+  public Point(){
+    // NULL point
+  }
+
+  public double getX(){
+    return this.x;
+  }
+
+  public double getY(){
+    return this.y;
+  }
+  
+  public Point setx(double x){
+    this.x = x;
+    return this;
+  }
+
+  public Point sety(double x){
+    this.y = y;
+    return this;
+  }
+
 }
