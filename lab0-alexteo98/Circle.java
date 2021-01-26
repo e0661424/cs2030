@@ -34,10 +34,8 @@ class Circle {
    */
   public boolean contains(Point p) {
     boolean result = false;
-    
-    // result = (Math.pow(r,2) == Math.pow((c.getX()-p.getX()),2) + Math.pow((c.getY()-p.getY()),2));
 
-    return (Math.pow(r,2) >= Math.pow((c.getX()-p.getX()),2) + Math.pow((c.getY()-p.getY()),2));
+    return r >= c.getDistance(p);
   }
 
   /**
