@@ -3,7 +3,7 @@ import java.util.Random;
 class RandomPoint extends Point{
 
   // static double seed = 0;
-  static Random rng = new Random(1);
+  public static Random rng = new Random(1);
 
   public RandomPoint(double minX,double maxX,double minY,double maxY){
    
@@ -19,8 +19,8 @@ class RandomPoint extends Point{
     this.setY(y);
   }
 
-  public void setSeed(long seed){
-    rng = new Random(seed);
+  public static void setSeed(long seed){
+    rng.setSeed(seed);
   }
 
 

@@ -14,17 +14,23 @@ import java.util.Scanner;
 
 class Lab0 {
 
-  // TODO estimatePi(long numOfPoints, int seed) {
-  // }
+  public double  estimatePi(long numOfPoints, int seed) {
+  
+  int pointsInside=0;
+
+  RandomPoint.setSeed(seed);
+
+  return pointsInside/numOfPoints;
+  }
 
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     int numOfPoints = sc.nextInt();
     int seed = sc.nextInt();
 
-    double pi = estimatePi(numOfPoints, seed);
+    // double pi = estimatePi(numOfPoints, seed);
 
-    System.out.println(pi);
+    // System.out.println(pi);
     sc.close();
   }
 }
