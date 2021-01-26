@@ -7,7 +7,7 @@ class RandomPoint extends Point{
 
   public RandomPoint(double minX,double maxX,double minY,double maxY){
    
-    super();
+    super(0,0);
 
     double randomX = rng.nextDouble();
     double  x = (((maxX-minX)*randomX)+minX);

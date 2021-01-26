@@ -16,10 +16,6 @@ class Point {
     this.y = y;
   }
 
-  public Point(){
-    // NULL point
-  }
-
   public double getX(){
     return this.x;
   }
