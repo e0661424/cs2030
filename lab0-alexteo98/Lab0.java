@@ -14,13 +14,25 @@ import java.util.Scanner;
 
 class Lab0 {
 
-  public double  estimatePi(long numOfPoints, int seed) {
+  static double estimatePi(long numOfPoints, int seed) {
   
-  int pointsInside=0;
+    long pointsInside=0;
 
-  RandomPoint.setSeed(seed);
+    // setting seed
+    RandomPoint.setSeed(seed);
+  
+    Point p1 = new Point (0.5,0.5);
+    Circle c = new Circle(p1,0.5);
 
-  return pointsInside/numOfPoints;
+    for (int i=0;i<numOfPoints;i++){
+      Point p = new RandomPoint(0,1,0,1);
+
+      if(c.contains(p)){
+        pointsInside++;
+      }
+    }
+    double pi=(double)pointsInside/numOfPoints*4;
+    return pi;
   }
 
   public static void main(String[] args) {
@@ -28,9 +40,9 @@ class Lab0 {
     int numOfPoints = sc.nextInt();
     int seed = sc.nextInt();
 
-    // double pi = estimatePi(numOfPoints, seed);
+    double pi = estimatePi(numOfPoints, seed);
 
-    // System.out.println(pi);
+    System.out.println(pi);
     sc.close();
   }
 }
