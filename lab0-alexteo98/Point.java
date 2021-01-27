@@ -16,10 +16,6 @@ class Point {
     this.y = y;
   }
 
-  public Point(){
-    // NULL point
-  }
-
   public double getX(){
     return this.x;
   }
@@ -28,14 +24,17 @@ class Point {
     return this.y;
   }
   
-  public Point setx(double x){
+  public Point setX(double x){
     this.x = x;
     return this;
   }
 
-  public Point sety(double x){
+  public Point setY(double y){
     this.y = y;
     return this;
   }
-
+  
+  public double getDistance(Point p){
+    return Math.sqrt(Math.pow(p.getX()-this.x,2)+Math.pow(p.getY()-this.y,2));
+  }
 }
