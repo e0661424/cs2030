@@ -1,31 +1,32 @@
 //import java.util.Arrays;
 class Counter{
-  private boolean[] counterID;
-  private int numberOfCounters=0;
+  private boolean available=true;
+  private static int lastCounterID=0;
+  private int counterID=0;
+  public Customer currentCustomer;
 
-  public Counter(int n){
-    counterID = new boolean[n];
-    
-    // set numberOfCounters
-    setNumberOfCounters(n);
-
-    // set all to available
-    for (int i=0;i<numberOfCounters;i++){
-      counterID[i]=true;
-    }
-    
+  public Counter(){
+    //set counter id
+    counterID=lastCounterID;
+    lastCounterID++;
   }
 
   public boolean available(){
-    for(int i=0;i<counterID.length;i++){
-      if (counterID[i]==true){
-        return true;
-      }
-    }
-    return false;
+    return this.available;
   }
 
-  public void setNumberOfCounters(int n){
-    this.numberOfCounters=n;
+  public void occupyCounter(Customer c){
+    available=true;
+    currentCustomer = c;
+  }
+
+  public void releaseCounter(){
+    available=false;
+    currentCustomer=null;
+  }
+
+  public String toString(Customer c){
+    if (available) { return ("Currently serving:" + c.getCustomerID()); }
+    else {return ("Currently empty");}
   }
 }

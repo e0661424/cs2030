@@ -1,16 +1,19 @@
 class ArrivalEvent extends Event{
 
-  public ArrivalEvent{
+  private Customer c; 
+  public ArrivalEvent(Customer c,double time){
     //constructor
+    super(time);
+    this.c=c;
   }
 
   @Override
   public String toString(){
-    return String.format(": Customer %d arrives", this.customerId);
+    return String.format(": Customer %d arrives", c.getCustomerID());
   }
 
   public void checkCounter(){
-    //check counter number
+    //check counter availability
     //if counter >0 , call begin
     //else call depart
   }
@@ -23,4 +26,9 @@ class ArrivalEvent extends Event{
     // instantiate departure
   }
 
+  @Override
+  public Event[] simulate(){
+    // override abstract method
+    return new Event[333];
+  }
 }
