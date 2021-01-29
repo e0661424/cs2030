@@ -11,5 +11,8 @@ class ServiceEndEvent extends Event{
     
   }
   
-    
+  @Override
+  public String toString(){
+    return ("Service Ended for Customer: " + c.getCustomerID() + " at Counter: " + ctr.getCounterID()) ;
+  }
 }
