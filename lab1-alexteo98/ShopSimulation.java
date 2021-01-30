@@ -44,14 +44,16 @@ class ShopSimulation extends Simulation {
   private int noOfCustomers=0;
   private int noOfCounters=0;
   private double[][] timings;
+  private Scanner s;
 
   public ShopSimulation(Scanner sc){
-    initialiseValues(sc);
+    this.s=sc;
+    initialiseValues();
   }
 
-  private void initialiseValues(Scanner sc){
-    noOfCustomers=(int) sc.nextDouble();
-    noOfCounters=(int) sc.nextDouble();
+  private void initialiseValues(){
+    noOfCustomers=(int) this.s.nextDouble();
+    noOfCounters=(int) this.s.nextDouble();
     timings= new double [noOfCustomers] [2];  
   }
 
@@ -69,5 +71,15 @@ class ShopSimulation extends Simulation {
       customers[i]=new Customer();
     }
     return customers;
+  }
+
+  private double[][] createTimings(int noOfCustomers){
+    timings = new double [noOfCustomers] [2];
+    for (int i=0;i<noOfCustomers;i++){
+      timings[i][0] = this.s.nextDouble();
+      timings[i][1] = this.s.nextDouble();
+    }
+
+    return timings;
   }
 }
