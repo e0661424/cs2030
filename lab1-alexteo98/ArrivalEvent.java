@@ -1,9 +1,13 @@
 class ArrivalEvent extends Event{
 
   private Customer c; 
+  private Counter ctr;
+  private double time;
+
   public ArrivalEvent(Customer c,double time){
     //constructor
     super(time);
+    this.time=time;
     this.c=c;
   }
 
@@ -12,23 +16,28 @@ class ArrivalEvent extends Event{
     return String.format(": Customer %d arrives", c.getCustomerID());
   }
 
-  public void checkCounter(){
+  public Event[] simulate(){
     //check counter availability
     //if counter >0 , call begin
     //else call depart
+    boolean available=true;
+    if (available){
+      return serve();
+    }
+    else{
+      return depart();
+    }
   }
 
-  public void serve(){
-    // instantiate service.begin
+  public Event[] serve(){
+    // instantiate service.begi
+    double serviceTime=0;
+    // TODO
+    return new Event[] {new ServiceBeginEvent(this.c,this.ctr,this.time,serviceTime)};
   }
 
-  public void depart(){
+  public Event[] depart(){
     // instantiate departure
-  }
-
-  @Override
-  public Event[] simulate(){
-    // override abstract method
-    return new Event[333];
+    return new Event[] {new DepartureEvent(this.c,this.time)};
   }
 }

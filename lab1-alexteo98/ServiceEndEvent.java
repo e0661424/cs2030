@@ -8,11 +8,20 @@ class ServiceEndEvent extends Event{
     super(time);
     this.c=c;
     this.ctr=ctr;
-    
+  }
+
+  private void resetCounter(){
+      ctr.releaseCounter();
+  }
+
+  public Event[] simulate(){
+    double time =super.getTime();
+    return new Event[] {new DepartureEvent(c,time)};
+
   }
   
   @Override
   public String toString(){
-    return ("Service Ended for Customer: " + c.getCustomerID() + " at Counter: " + ctr.getCounterID()) ;
+    return String.format(": Customer %d service done (by Counter %d)", c.getCustomerID(), ctr.getCounterID());
   }
 }

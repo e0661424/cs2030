@@ -1,11 +1,10 @@
 class DepartureEvent extends Event{
   private Customer c;
-  private Counter ctr;
+  // private Counter ctr;
 
-  public DepartureEvent(Customer C,Counter Ctr,double time){
+  public DepartureEvent(Customer c,double time){
     super(time);
-    this.c=C;
-    this.ctr=Ctr;
+    this.c=c;
   }
 
   @Override
@@ -13,4 +12,8 @@ class DepartureEvent extends Event{
     return String.format(": Customer %d departed",c.getCustomerID());
   }
 
+  
+  public Event[] simulate(){
+    return new Event[] {};
+  }
 }

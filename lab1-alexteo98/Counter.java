@@ -11,6 +11,10 @@ class Counter{
     lastCounterID++;
   }
 
+  public int getCounterID(){
+    return this.counterID;
+  }
+
   public boolean available(){
     return this.available;
   }
