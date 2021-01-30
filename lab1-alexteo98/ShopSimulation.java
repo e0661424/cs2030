@@ -10,14 +10,12 @@ class ShopSimulation extends Simulation {
   /** 
    * The availability of counters in the shop. 
    */
-  public boolean[] available;
 
   /** 
    * The list of customer arrival events to populate
    * the simulation with.
    */
-  public Event[] initEvents;
-
+  
   /** 
    * Constructor for a shop simulation. 
    *
@@ -27,24 +25,6 @@ class ShopSimulation extends Simulation {
    *           sequence of (arrival time, service time) pair, each
    *           pair represents a customer.
    */
-  public ShopSimulation(Scanner sc) {
-    initEvents = new Event[sc.nextInt()];
-    int numOfCounters = sc.nextInt();
-
-    available = new boolean[numOfCounters];
-    for (int i = 0; i < numOfCounters; i++) {
-      available[i] = true;
-    }
-
-    int id = 0;
-    while (sc.hasNextDouble()) {
-      double arrivalTime = sc.nextDouble();
-      double serviceTime = sc.nextDouble();
-      initEvents[id] = new ShopEvent(ShopEvent.ARRIVAL, 
-          arrivalTime, id, serviceTime, available);
-      id += 1;
-    }
-  }
 
   /**
    * Retrieve an array of events to populate the 
@@ -54,6 +34,40 @@ class ShopSimulation extends Simulation {
    */
   @Override
   public Event[] getInitialEvents() {
-    return initEvents;
+    // return initEvents
+    return new Event[] {};
+  }
+
+  //--------------------------------------------------------
+  //
+
+  private int noOfCustomers=0;
+  private int noOfCounters=0;
+  private double[][] timings;
+
+  public ShopSimulation(Scanner sc){
+    initialiseValues(sc);
+  }
+
+  private void initialiseValues(Scanner sc){
+    noOfCustomers=(int) sc.nextDouble();
+    noOfCounters=(int) sc.nextDouble();
+    timings= new double [noOfCustomers] [2];  
+  }
+
+  private Counter[] createCounters(int noOfCounters){
+    Counter[] counters = new Counter[noOfCounters];
+    for (int i=0;i<noOfCounters;i++){
+      counters[i] = new Counter();
+    }
+    return counters;
+  }
+
+  private Customer[] createCustomers(int noOfCustomers){
+    Customer[] customers = new Customer[noOfCustomers];
+    for(int i=0;i<noOfCustomers;i++){
+      customers[i]=new Customer();
+    }
+    return customers;
   }
 }
