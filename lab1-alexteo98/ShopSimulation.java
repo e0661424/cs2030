@@ -64,7 +64,7 @@ class ShopSimulation extends Simulation {
     this.counters =  createCounters(noOfCounters);
     this.customers = createCustomers(noOfCustomers);
     timings = createTimings(noOfCustomers,sc);
-    System.out.println("values initialised");
+    // System.out.println("values initialised");
     
     // Start simulation
     for (int i=0;i<noOfCustomers;i++){
@@ -80,7 +80,7 @@ class ShopSimulation extends Simulation {
     Counter[] counters = new Counter[noOfCounters];
     for (int i=0;i<noOfCounters;i++){
       counters[i] = new Counter();
-      System.out.println("Counter" + i + "initialised");
+      // System.out.println("Counter" + i + "initialised");
     }
     return counters;
   }

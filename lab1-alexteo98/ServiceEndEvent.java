@@ -20,6 +20,6 @@ class ServiceEndEvent extends Event{
   
   @Override
   public String toString(){
-    return String.format(": Customer %d service done (by Counter %d)", c.getCustomerID(), ctr.getCounterID());
+    return super.toString() + String.format(": Customer %d service done (by Counter %d)", c.getCustomerID(), ctr.getCounterID());
   }
 }

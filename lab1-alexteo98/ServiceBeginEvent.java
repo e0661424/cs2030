@@ -11,17 +11,18 @@ class ServiceBeginEvent extends Event{
     this.c=c;
     this.ctr=ctr;
     this.time=time;
-    ctr.occupyCounter(c);
+    //ctr.occupyCounter(c);
 
   }
 
   public Event[] simulate(){
+    ctr.occupyCounter(c);
     double endTime = this.time + this.serviceTime;
     return new Event[] {new ServiceEndEvent(c,ctr,endTime)};
   }
   
   @Override
   public String toString(){
-    return String.format(": Customer %d service begin (by Counter %d)", c.getCustomerID(), ctr.getCounterID());
+    return super.toString() + String.format(": Customer %d service begin (by Counter %d)", c.getCustomerID(), ctr.getCounterID());
   }
 }

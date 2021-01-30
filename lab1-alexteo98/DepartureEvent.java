@@ -9,7 +9,7 @@ class DepartureEvent extends Event{
 
   @Override
   public String toString(){
-    return String.format(": Customer %d departed",c.getCustomerID());
+    return super.toString() + String.format(": Customer %d departed",c.getCustomerID());
   }
 
   

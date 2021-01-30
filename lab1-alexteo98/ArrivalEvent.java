@@ -17,7 +17,7 @@ class ArrivalEvent extends Event{
 
   @Override
   public String toString(){
-    return String.format(": Customer %d arrives", c.getCustomerID());
+    return super.toString() + String.format(": Customer %d arrives", c.getCustomerID());
   }
 
   public Event[] simulate(){
@@ -48,7 +48,7 @@ class ArrivalEvent extends Event{
     // default value of -1 - no counters available
     int counterNo=-1;
     for (int i=0;i<ctrs.length;i++){
-     // System.out.println("Counter " + i + " - Available: " + ctrs[i].available());
+      System.out.println("Counter " + i + " - Available: " + ctrs[i].available());
       if (ctrs[i].available()){
         counterNo=i;
         this.ctr=ctrs[i];
