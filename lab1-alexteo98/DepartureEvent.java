@@ -14,6 +14,7 @@ class DepartureEvent extends Event{
 
   
   public Event[] simulate(){
-    return new Event[] {};
+     return new Event[] {};
+    
   }
 }

@@ -11,6 +11,7 @@ class ServiceBeginEvent extends Event{
     this.c=c;
     this.ctr=ctr;
     this.time=time;
+    ctr.occupyCounter(c);
 
   }
 
@@ -21,6 +22,6 @@ class ServiceBeginEvent extends Event{
   
   @Override
   public String toString(){
-    return String.format(": Customer %d arrives", c.getCustomerID());
+    return String.format(": Customer %d service begin (by Counter %d)", c.getCustomerID(), ctr.getCounterID());
   }
 }

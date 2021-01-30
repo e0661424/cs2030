@@ -20,13 +20,13 @@ class Counter{
   }
 
   public void occupyCounter(Customer c){
-    available=true;
-    currentCustomer = c;
+    this.available=false;
+    this.currentCustomer = c;
   }
 
   public void releaseCounter(){
-    available=false;
-    currentCustomer=null;
+    this.available=true;
+    this.currentCustomer=null;
   }
 
   public String toString(Customer c){
