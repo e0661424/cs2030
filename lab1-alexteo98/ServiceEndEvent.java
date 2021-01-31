@@ -1,4 +1,4 @@
-class ServiceEndEvent extends Event{
+class ServiceEndEvent extends Event { 
  
   /**
   * This class implements a service end event of the shop.
@@ -13,22 +13,22 @@ class ServiceEndEvent extends Event{
 
 
   // ----- Constructors ---------------------
-  public ServiceEndEvent(Customer c,Counter ctr,double time){
+  public ServiceEndEvent(Customer c, Counter ctr, double time) { 
     super(time);
-    this.c=c;
-    this.ctr=ctr;
+    this.c = c;
+    this.ctr = ctr;
   }
 
   // ----- Methods ------------------------
-  public Event[] simulate(){
+  public Event[] simulate() { 
     ctr.releaseCounter();
-    double time=super.getTime();
-    return new Event[] {new DepartureEvent(c,time)};
-
+    double time = super.getTime();
+    return new Event[] { new DepartureEvent(c, time)};
   }
   
   @Override
-  public String toString(){
-    return super.toString() + String.format(": Customer %d service done (by Counter %d)", c.getCustomerID(), ctr.getCounterID());
+  public String toString() { 
+    return super.toString() + String.format(": Customer %d service done (by Counter %d)", 
+        c.getCustomerID(), ctr.getCounterID());
   }
 }

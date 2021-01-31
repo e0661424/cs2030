@@ -1,54 +1,57 @@
-class Counter{
+class Counter { 
 
- /**
- * This class implements a Counter.
- *
- * @author Alex Teo (Lab16A)
- * @version CS2030S AY20/21 Semester 2
- */
+  /**
+  * This class implements a Counter.
+  *
+  * @author Alex Teo (Lab16A)
+  * @version CS2030S AY20/21 Semester 2
+  */
 
   // ----- Data -------------------------------------
-  private boolean available=true;
-  private static int lastCounterID=0;
-  private int counterID=0;
+  private boolean available = true;
+  private static int lastCounterID = 0;
+  private int counterID = 0;
   private Customer currentCustomer;
 
 
   // ----- Constructors -----------------------------
-  public Counter(){
+  public Counter() { 
     //set counter id
-    counterID=lastCounterID;
+    counterID = lastCounterID;
     lastCounterID++;
   }
 
   // ----- Getters and Setters ----------------------
 
-  public int getCounterID(){
+  public int getCounterID() { 
     return this.counterID;
   }
 
-  public boolean available(){
+  public boolean available() { 
     return this.available;
   }
 
-  public Customer getCustomer(){
+  public Customer getCustomer() { 
     return this.currentCustomer;
   }
 
   // ----- Methods -----------------------------------
 
-  public void occupyCounter(Customer c){
-    this.available=false;
+  public void occupyCounter(Customer c) { 
+    this.available = false;
     this.currentCustomer = c;
   }
 
-  public void releaseCounter(){
-    this.available=true;
-    this.currentCustomer=null;
+  public void releaseCounter() { 
+    this.available = true;
+    this.currentCustomer = null;
   }
 
-  public String toString(Customer c){
-    if (available) { return ("Currently serving:" + c.getCustomerID()); }
-    else {return ("Currently empty");}
+  public String toString(Customer c) { 
+    if (available) { 
+      return ("Currently serving:" + c.getCustomerID());
+    } else { 
+      return ("Currently empty");
+    }
   }
 }

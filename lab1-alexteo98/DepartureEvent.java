@@ -1,4 +1,4 @@
-class DepartureEvent extends Event{
+class DepartureEvent extends Event { 
  
   /**
   * This class implements a departure event of the shop.
@@ -11,19 +11,19 @@ class DepartureEvent extends Event{
   private Customer c;
   
   // ----- Constructors ---------------
-  public DepartureEvent(Customer c,double time){
+  public DepartureEvent(Customer c, double time) { 
     super(time);
-    this.c=c;
+    this.c = c;
   }
 
   // ----- Methods --------------------
   @Override
-  public String toString(){
-    return super.toString() + String.format(": Customer %d departed",c.getCustomerID());
+  public String toString() { 
+    return super.toString() + String.format(": Customer %d departed", c.getCustomerID());
   }
 
-  public Event[] simulate(){
-     return new Event[] {};
+  public Event[] simulate() { 
+    return new Event[] { };
     
   }
 }
