@@ -4,7 +4,7 @@
  * simulation, inherit from this class and implement
  * the `getInitialEvents` method.  
  *
- * @author Wei Tsang
+ * @author Alex Teo (Lab16A)
  * @version CS2030S AY20/21 Semester 2
  */
 abstract class Simulation {

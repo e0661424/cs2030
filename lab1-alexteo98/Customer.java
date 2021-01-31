@@ -27,17 +27,4 @@ class Customer{
   public void setCounter(int n){
     currentCounter=n;
   }
- // public void setTime(double Time){
- //   this.serviceTime=Time;
- // }
-
-  //public double getServiceTime(){
-  //  return this.serviceTime;
-  //}
-
-
-  //public void addServiceTime(double t){
-  //  this.serviceTime+=t;
-  //}
-
 }

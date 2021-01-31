@@ -21,7 +21,7 @@ class Counter{
     lastCounterID++;
   }
 
-  // ---- -Getters and Setters ----------------------
+  // ----- Getters and Setters ----------------------
 
   public int getCounterID(){
     return this.counterID;
