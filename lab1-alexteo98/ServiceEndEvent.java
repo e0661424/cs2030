@@ -7,12 +7,13 @@ class ServiceEndEvent extends Event{
     super(time);
     this.c=c;
     this.ctr=ctr;
-    ctr.releaseCounter();
+    //ctr.releaseCounter();
   }
 
  
 
   public Event[] simulate(){
+    ctr.releaseCounter();
     double time=super.getTime();
     return new Event[] {new DepartureEvent(c,time)};
 

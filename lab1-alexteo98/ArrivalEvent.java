@@ -48,10 +48,10 @@ class ArrivalEvent extends Event{
     // default value of -1 - no counters available
     int counterNo=-1;
     for (int i=0;i<ctrs.length;i++){
-      System.out.println("Counter " + i + " - Available: " + ctrs[i].available());
-      if (ctrs[i].available()){
+     if (ctrs[i].available()){
         counterNo=i;
         this.ctr=ctrs[i];
+        break;
       } else{/* not needed */}
     }
     return counterNo;
