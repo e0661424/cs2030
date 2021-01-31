@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * This class implements a shop simulation.
  *
- * @author Wei Tsang
+ * @author Alex Teo (Lab16A)
  * @version CS2030S AY20/21 Semester 2
  */ 
 class ShopSimulation extends Simulation {
@@ -37,8 +37,7 @@ class ShopSimulation extends Simulation {
     return initEvents;
   }
 
-  //--------------------------------------------------------
-  //
+  // ----- Data ----------------------------------
 
   private int noOfCustomers=0;
   private int noOfCounters=0;
@@ -46,46 +45,46 @@ class ShopSimulation extends Simulation {
   private Customer[] customers;
   private Counter[] counters;
 
+  // ----- Constructors -------------------------
   public ShopSimulation(Scanner sc){
-   // this.s=sc;
-    //System.out.println(sc.nextDouble());
+    
     this.noOfCustomers=sc.nextInt();
     this.noOfCounters=sc.nextInt();
     
     initialiseValues(sc);
+    startSimulation();
   }
 
- private void initialiseValues(Scanner sc){
-
-
-
+  // ----- Methods ----------------------------
+  private void initialiseValues(Scanner sc){
+   
     initEvents=new Event[noOfCustomers];
-
     this.counters =  createCounters(noOfCounters);
     this.customers = createCustomers(noOfCustomers);
     timings = createTimings(noOfCustomers,sc);
-    // System.out.println("values initialised");
-    
-    // Start simulation
+   }
+
+  public void startSimulation(){
+   
     for (int i=0;i<noOfCustomers;i++){
-      double arrivalTime = timings[i][0];
-      double serviceTime = timings[i][1];
-      Customer c = customers[i];
-      // Counter ctr = counters[i];
-      initEvents[i] = new ArrivalEvent(c,counters,timings[i][0],timings[i][1]);
+     double arrivalTime = timings[i][0];
+     double serviceTime = timings[i][1];
+     Customer c = customers[i];
+     initEvents[i] = new ArrivalEvent(c,counters,timings[i][0],timings[i][1]);
     }
   }
 
   private Counter[] createCounters(int noOfCounters){
+    
     Counter[] counters = new Counter[noOfCounters];
     for (int i=0;i<noOfCounters;i++){
       counters[i] = new Counter();
-      // System.out.println("Counter" + i + "initialised");
     }
     return counters;
   }
 
   private Customer[] createCustomers(int noOfCustomers){
+    
     Customer[] customers = new Customer[noOfCustomers];
     for(int i=0;i<noOfCustomers;i++){
       customers[i]=new Customer();
@@ -94,6 +93,7 @@ class ShopSimulation extends Simulation {
   }
 
   private double[][] createTimings(int noOfCustomers,Scanner sc){
+    
     double[][] timings = new double [noOfCustomers] [2];
     for (int i=0;i<noOfCustomers;i++){
       timings[i][0] = sc.nextDouble();

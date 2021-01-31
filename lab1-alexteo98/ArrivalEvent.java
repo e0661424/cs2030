@@ -1,11 +1,20 @@
 class ArrivalEvent extends Event{
 
+  /**
+  * This class implements a arrival event of the shop.
+  *
+  * @author Alex Teo (Lab16A)
+  * @version CS2030S AY20/21 Semester 2
+  */
+
+  // ------ Data ---------------------------------
   private Customer c; 
   private Counter ctr;
   private Counter[] ctrs;
   private double time;
   private double serviceTime;
 
+  // ----- Constructors --------------------------
   public ArrivalEvent(Customer c,Counter[] ctrs,double time,double serviceTime){
     //constructor
     super(time);
@@ -15,15 +24,16 @@ class ArrivalEvent extends Event{
     this.ctrs=ctrs;
   }
 
+  // ----- Methods ------------------------------
   @Override
   public String toString(){
     return super.toString() + String.format(": Customer %d arrives", c.getCustomerID());
   }
 
   public Event[] simulate(){
-    //check counter availability
-    //if counter >0 , call begin
-    //else call depart
+    // ----- check counter availability
+    // ----- if no Counters, call depart() 
+    // ----- else call serve()
     int counterNo = availableCounters(ctrs);
     if (counterNo == -1 ){
       return depart();
@@ -34,21 +44,18 @@ class ArrivalEvent extends Event{
   }
 
   public Event[] serve(){
-    // instantiate service.begin
-    // TODO
     return new Event[] {new ServiceBeginEvent(this.c,this.ctr,this.time,this.serviceTime)};
   }
 
   public Event[] depart(){
-    // instantiate departure
     return new Event[] {new DepartureEvent(this.c,this.time)};
   }
 
   private int availableCounters(Counter[] ctrs){
-    // default value of -1 - no counters available
+    // ----- default value of -1 -> no counters available
     int counterNo=-1;
-    for (int i=0;i<ctrs.length;i++){
-     if (ctrs[i].available()){
+    for (int i=0;i<ctrs.length;i++){ // ----- Loop through to find available counter;
+     if (ctrs[i].available()){       // ----- Breaks if found available counter
         counterNo=i;
         this.ctr=ctrs[i];
         break;
