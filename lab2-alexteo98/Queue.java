@@ -3,7 +3,7 @@
  * with limited capacity that can store any Object instances.
  * Not to be confused with java.util.Queue.
  *
- * @author Wei Tsang
+ * @author Alex Teo (Lab16A)
  * @version CS2030S AY20/21 Semester 2
  */
 class Queue {
