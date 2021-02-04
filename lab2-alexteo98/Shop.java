@@ -27,7 +27,7 @@ class Shop {
 
   private Counter[] createCounters(int noOfCounters) { 
     Counter[] allCounters = new Counter[noOfCounters];
-    for (int i=0; i < noOfCounters; i++) { 
+    for (int i = 0; i < noOfCounters; i++) { 
       allCounters[i] = new Counter();
     }
     return allCounters;
@@ -35,7 +35,7 @@ class Shop {
 
   private Customers[] createCustomers(int noOfCustomers, double[][] timings) { 
     Customer[] allCustomers = new Customers[noOfCustomers];
-    for (int i=0; i < noOfCustomers; i++) { 
+    for (int i = 0; i < noOfCustomers; i++) { 
       allCustomers[i] = new Customers(timings[i][0], timings[i][1]);
     }
     return allCustomers;

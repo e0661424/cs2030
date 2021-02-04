@@ -20,8 +20,6 @@ class ShopSimulation extends Simulation {
   private int noOfCustomers = 0;
   private int noOfCounters = 0;
   private double[][] timings;
-  private Customer[] customers;
-  private Counter[] counters;
 
   // ----- Constructors -------------------------
   /** 
@@ -39,7 +37,9 @@ class ShopSimulation extends Simulation {
     this.noOfCustomers = sc.nextInt();
     this.noOfCounters = sc.nextInt();
 
-    startSimulation();
+    initEvents = new Event[noOfCustomers];
+    shop = new Shop(noOfCustomers, noOfCounters, timings);
+    createTimings(sc);
   }
 
   // ----- Methods ----------------------------
@@ -54,50 +54,17 @@ class ShopSimulation extends Simulation {
   public Event[] getInitialEvents() { 
     return initEvents;
   }
-  
-  private void initialiseValues(Scanner sc) { 
-   
-    initEvents = new Event[noOfCustomers];
-    this.counters = createCounters(noOfCounters);
-    this.customers = createCustomers(noOfCustomers);
-    timings = createTimings(noOfCustomers, sc);
-  }
 
-  public void startSimulation() { 
-   
-    for (int i = 0; i < noOfCustomers; i++) { 
-      double arrivalTime = timings[i][0];
-      double serviceTime = timings[i][1];
-      Customer c = customers[i];
-      initEvents[i] = new ArrivalEvent(c, counters, timings[i][0], timings[i][1]);
-    }
+  public double[][] createTimings(Scanner sc) { 
+      timings[][] = new double[noOfCustomers][2];
+      for (int i = 0; i < noOfCustomers; i++) { 
+          timings[i][0] = sc.nextDouble();
+          timings[i][1] = sc.nextDouble();
+      }
   }
-
-  private Counter[] createCounters(int noOfCounters) { 
     
-    Counter[] counters = new Counter[noOfCounters];
-    for (int i = 0; i < noOfCounters; i++) { 
-      counters[i] = new Counter();
+  public void startSimulation() {  
+      initEvents[i] = new ArrivalEvent(c, shop);
     }
-    return counters;
-  }
-
-  private Customer[] createCustomers(int noOfCustomers) { 
-    
-    Customer[] customers = new Customer[noOfCustomers];
-    for (int i = 0; i < noOfCustomers; i++) { 
-      customers[i] = new Customer();
-    }
-    return customers;
-  }
-
-  private double[][] createTimings(int noOfCustomers, Scanner sc) { 
-    
-    double[][] timings = new double [noOfCustomers] [2];
-    for (int i = 0; i < noOfCustomers; i++) { 
-      timings[i][0] = sc.nextDouble();
-      timings[i][1] = sc.nextDouble();
-    }
-    return timings;
   }
 }

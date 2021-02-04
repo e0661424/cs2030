@@ -8,6 +8,7 @@ class ArrivalEvent extends Event {
   */
 
   // ------ Data ---------------------------------
+  private Shop shop;
   private Customer c; 
   private Counter ctr;
   private Counter[] ctrs;
@@ -15,13 +16,10 @@ class ArrivalEvent extends Event {
   private double serviceTime;
 
   // ----- Constructors --------------------------
-  public ArrivalEvent(Customer c, Counter[] ctrs, double time, double serviceTime) { 
-    //constructor
-    super(time);
-    this.time = time;
+  public ArrivalEvent(Customer c, Shop shop) { 
+    super(c.getTime());
     this.c = c;
-    this.serviceTime = serviceTime;
-    this.ctrs = ctrs;
+    this.shop = shop;
   }
 
   // ----- Methods ------------------------------
@@ -34,12 +32,7 @@ class ArrivalEvent extends Event {
     // ----- check counter availability
     // ----- if no Counters, call depart() 
     // ----- else call serve()
-    int counterNo = availableCounters(ctrs);
-    if (counterNo == -1) { 
-      return depart();
-    } else { 
-      return serve();
-    }
+    // TODO
   }
 
   public Event[] serve() { 
@@ -48,18 +41,5 @@ class ArrivalEvent extends Event {
 
   public Event[] depart() { 
     return new Event[] {new DepartureEvent(this.c, this.time)};
-  }
-
-  private int availableCounters(Counter[] ctrs) { 
-    // ----- default value of -1 -> no counters available
-    int counterNo = -1;
-    for (int i = 0; i < ctrs.length; i++) { // ----- Loop through to find available counter;
-      if (ctrs[i].available()) {       // ----- Breaks if found available counter
-        counterNo = i;
-        this.ctr = ctrs[i];
-        break;
-      } else { /* not needed */ }
-    }
-    return counterNo;
   }
 }

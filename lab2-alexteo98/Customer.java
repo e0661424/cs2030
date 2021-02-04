@@ -1,11 +1,11 @@
 class Customer { 
- 
+
   /**
-  * This class implements a customer.
-  *
-  * @author Alex Teo (Lab16A)
-  * @version CS2030S AY20/21 Semester 2
-  */
+   * This class implements a customer.
+   *
+   * @author Alex Teo (Lab16A)
+   * @version CS2030S AY20/21 Semester 2
+   */
 
   // ----- Data ---------------------------
   private int customerID = 0;
@@ -18,10 +18,13 @@ class Customer {
   public Customer() {
     this.customerID = lastCustomerID;
     lastCustomerID++;
+    this.time = 0;
+    this.serviceTime = 0;
   }
   public Customer(double time, double serviceTime) { 
-      this.time=time;
-      this.serviceTime=serviceTime;
+    this();
+    this.time=time;
+    this.serviceTime=serviceTime;
   }
 
   // ----- Getter and Setters ------------
@@ -32,9 +35,15 @@ class Customer {
   public void setCounter(int n) { 
     currentCounter = n;
   }
+  public double getTime() { 
+      return this.time;
+  }
+  public double getServiceTime() { 
+      return this.serviceTime;
+  }
 
   @Override
   public String toString() { 
-      return String.format("C%d",this.customerID);
+    return String.format("C%d",this.customerID);
   }
 }
