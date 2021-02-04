@@ -14,19 +14,16 @@ class ServiceBeginEvent extends Event {
   private double serviceTime;
 
   // ----- Construcctors -------------------
-  public ServiceBeginEvent(Customer c, Counter ctr, double time, double serviceTime) { 
-    super(time);
-    this.serviceTime = serviceTime;
+  public ServiceBeginEvent(Customer c) { 
+    super(c.getTime());
     this.c = c;
-    this.ctr = ctr;
-    this.time = time;
   }
 
   // ----- Methods ------------------------
   public Event[] simulate() { 
-    ctr.occupyCounter(c);
-    double endTime = this.time + this.serviceTime;
-    return new Event[] {new ServiceEndEvent(c, ctr, endTime)};
+    // occupy counter
+    c = c.setTime(c.getTime() + c.getServiceTime());
+    return new Event[] {new ServiceEndEvent(c)};
   }
   
   @Override

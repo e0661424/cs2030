@@ -10,7 +10,7 @@ class Customer {
   // ----- Data ---------------------------
   private int customerID = 0;
   private static int lastCustomerID = 0;
-  private int currentCounter = 0;
+  private Counter currentCounter;
   private double time;
   private double serviceTime;
 
@@ -31,12 +31,18 @@ class Customer {
   public int getCustomerID() { 
     return this.customerID;
   }
-
-  public void setCounter(int n) { 
-    currentCounter = n;
+  public void setCounter(Counter c) { 
+    currentCounter = c;
+  }
+  public Counter getCounter() { 
+      return this.currentCounter;
   }
   public double getTime() { 
       return this.time;
+  }
+  public Customer setTime(double updatedTime) { 
+      this.time=updatedTime;
+      return this;
   }
   public double getServiceTime() { 
       return this.serviceTime;

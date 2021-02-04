@@ -13,22 +13,20 @@ class ServiceEndEvent extends Event {
 
 
   // ----- Constructors ---------------------
-  public ServiceEndEvent(Customer c, Counter ctr, double time) { 
+  public ServiceEndEvent(Customer c) { 
     super(time);
     this.c = c;
-    this.ctr = ctr;
   }
 
   // ----- Methods ------------------------
   public Event[] simulate() { 
-    ctr.releaseCounter();
-    double time = super.getTime();
-    return new Event[] { new DepartureEvent(c, time)};
+    // release counter
+    return new Event[] { new DepartureEvent(c)};
   }
   
   @Override
   public String toString() { 
-    return super.toString() + String.format(": %s service done (by %s)", 
-        c, ctr);
+    return String.format("%d : %s service done (by %s)", 
+        c.getTime(), c, c.getCounter()); // create getcounter method in customer class to retreive currrent counter - done
   }
 }

@@ -11,8 +11,8 @@ class DepartureEvent extends Event {
   private Customer c;
   
   // ----- Constructors ---------------
-  public DepartureEvent(Customer c, double time) { 
-    super(time);
+  public DepartureEvent(Customer c) { 
+    super(c.getTime());
     this.c = c;
   }
 
@@ -24,6 +24,5 @@ class DepartureEvent extends Event {
 
   public Event[] simulate() { 
     return new Event[] { };
-    
   }
 }

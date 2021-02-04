@@ -10,16 +10,18 @@ class ArrivalEvent extends Event {
   // ------ Data ---------------------------------
   private Shop shop;
   private Customer c; 
+  private Queue q;
   private Counter ctr;
   private Counter[] ctrs;
   private double time;
   private double serviceTime;
 
   // ----- Constructors --------------------------
-  public ArrivalEvent(Customer c, Shop shop) { 
+  public ArrivalEvent(Customer c, Shop shop, Queue q) { 
     super(c.getTime());
     this.c = c;
     this.shop = shop;
+    this.q = q;
   }
 
   // ----- Methods ------------------------------
@@ -32,7 +34,17 @@ class ArrivalEvent extends Event {
     // ----- check counter availability
     // ----- if no Counters, call depart() 
     // ----- else call serve()
+   
     // TODO
+    // shop.get available counters
+    // if counter.avail -> serve(cust)
+    // else { 
+    //  if (queue.full) { 
+    //    depart();
+    //  }else { 
+    //    queue();
+    //  }
+    // }
   }
 
   public Event[] serve() { 

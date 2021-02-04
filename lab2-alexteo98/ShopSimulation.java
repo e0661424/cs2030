@@ -17,6 +17,8 @@ class ShopSimulation extends Simulation {
   public Event[] initEvents;
  
   private Shop shop;
+  private Queue q;
+  private int queueLen;
   private int noOfCustomers = 0;
   private int noOfCounters = 0;
   private double[][] timings;
@@ -36,10 +38,13 @@ class ShopSimulation extends Simulation {
     
     this.noOfCustomers = sc.nextInt();
     this.noOfCounters = sc.nextInt();
+    this.queueLen=sc.nextInt();
 
     initEvents = new Event[noOfCustomers];
-    shop = new Shop(noOfCustomers, noOfCounters, timings);
+    
     createTimings(sc);
+    q = new Queue(queueLen);
+    shop = new Shop(noOfCustomers, noOfCounters, timings);
   }
 
   // ----- Methods ----------------------------
@@ -64,7 +69,7 @@ class ShopSimulation extends Simulation {
   }
     
   public void startSimulation() {  
-      initEvents[i] = new ArrivalEvent(c, shop);
+      initEvents[i] = new ArrivalEvent(c, shop, q);
     }
   }
 }
