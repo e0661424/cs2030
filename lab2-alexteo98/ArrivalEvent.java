@@ -1,11 +1,11 @@
 class ArrivalEvent extends Event { 
 
   /**
-  * This class implements a arrival event of the shop.
-  *
-  * @author Alex Teo (Lab16A)
-  * @version CS2030S AY20/21 Semester 2
-  */
+   * This class implements a arrival event of the shop.
+   *
+   * @author Alex Teo (Lab16A)
+   * @version CS2030S AY20/21 Semester 2
+   */
 
   // ------ Data ---------------------------------
   private Shop shop;
@@ -28,26 +28,26 @@ class ArrivalEvent extends Event {
 
   public Event[] simulate() { 
     if (shop.counterAvailable()) { 
-        return serve();
+      return serve();
     } else { 
-        /*if (shop.getQueue().isFull()) { 
-            return depart();
+          if (shop.getQueue().enq(this.c)) { 
+            //queued;
+            return new Event[] {};
         } else { 
-            return joinQ();
-        }*/
-      return depart();
+            return depart();
+        }
     }
   }
 
   private Event[] joinQ() { 
-      return new Event[]{new WaitEvent(this.c, this.shop)};
+    return new Event[]{new WaitEvent(this.c, this.shop)};
   }
   public Event[] serve() { 
     c.setCounter(shop.getAvailableCounter());
-    return new Event[] {new ServiceBeginEvent(this.c)};
+    return new Event[] {new ServiceBeginEvent(this.c, this.shop)};
   }
 
   public Event[] depart() { 
-    return new Event[] {new DepartureEvent(this.c)};
+    return new Event[] {new DepartureEvent(this.c, this.shop)};
   }
 }

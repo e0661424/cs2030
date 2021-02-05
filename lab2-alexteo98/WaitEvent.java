@@ -25,6 +25,6 @@ class WaitEvent extends Event {
       return new Event[] {new WaitEvent(c, shop)};
   }
   private Event[] serve()  { 
-      return new Event[] {new ServiceBeginEvent(c)};
+      return new Event[] {new ServiceBeginEvent(this.c, this.shop)};
   }
 }

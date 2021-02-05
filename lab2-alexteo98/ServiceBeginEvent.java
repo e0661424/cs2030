@@ -11,19 +11,21 @@ class ServiceBeginEvent extends Event {
   private Customer c;
   private Counter ctr;
   private double time;
+  private Shop shop;
 
   // ----- Construcctors -------------------
-  public ServiceBeginEvent(Customer c) { 
+  public ServiceBeginEvent(Customer c, Shop shop) { 
     super(c.getTime());
     this.c = c;
     this.time = c.getTime();
+    this.shop = shop;
   }
 
   // ----- Methods ------------------------
   public Event[] simulate() { 
     c.getCounter().occupyCounter(c);
     c = c.setTime(c.getTime() + c.getServiceTime());
-    return new Event[] {new ServiceEndEvent(c)};
+    return new Event[] {new ServiceEndEvent(this.c, this.shop)};
   }
   
   @Override

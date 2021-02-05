@@ -76,4 +76,8 @@ class Shop {
     }
     return allCustomers;
   }
+
+  public Customer nextCustomer() { 
+      return (Customer)q.deq();
+  }
 }

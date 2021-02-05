@@ -38,14 +38,14 @@ class ShopSimulation extends Simulation {
     
     this.noOfCustomers = sc.nextInt();
     this.noOfCounters = sc.nextInt();
-   // this.queueLen=sc.nextInt();
+    this.queueLen=sc.nextInt();
 
     initEvents = new Event[noOfCustomers];
     
     createTimings(sc);
-  //  q = new Queue(queueLen);
+    q = new Queue(queueLen);
     shop = new Shop(noOfCustomers, noOfCounters, timings);
-   // shop.setQueue(q);
+    shop.setQueue(q);
     populateEvents();
 }
 
