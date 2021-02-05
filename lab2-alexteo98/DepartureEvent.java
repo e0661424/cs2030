@@ -25,6 +25,13 @@ class DepartureEvent extends Event {
   }
 
   public Event[] simulate() { 
-    return new Event[] { };
+    Customer nextCustomer = (Customer)this.shop.getQueue().deq();
+    if (nextCustomer == null) { 
+        return new Event[] {};
+    } else {
+      nextCustomer.setTime(super.getTime());
+      nextCustomer.setCounter(this.c.getCounter());
+         return new Event[] {new ServiceBeginEvent(nextCustomer, this.shop) };
+    }
   }
 }

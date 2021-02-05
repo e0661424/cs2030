@@ -32,6 +32,7 @@ class ArrivalEvent extends Event {
     } else { 
           if (shop.getQueue().enq(this.c)) { 
             //queued;
+            System.out.println(String.format("%s has joined Queue %s", this.c, this.shop.getQueue()));
             return new Event[] {};
         } else { 
             return depart();

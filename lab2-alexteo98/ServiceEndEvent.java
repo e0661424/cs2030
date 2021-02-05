@@ -25,8 +25,7 @@ class ServiceEndEvent extends Event {
   // ----- Methods ------------------------
   public Event[] simulate() { 
     c.getCounter().releaseCounter();
-    //error
-    return new Event[] { new DepartureEvent(this.c, this.shop), new ServiceBeginEvent(this.shop.nextCustomer(), this.shop)};
+    return new Event[] { new DepartureEvent(this.c, this.shop)};
   }
   
   @Override
