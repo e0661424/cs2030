@@ -11,12 +11,12 @@ class ServiceBeginEvent extends Event {
   private Customer c;
   private Counter ctr;
   private double time;
-  private double serviceTime;
 
   // ----- Construcctors -------------------
   public ServiceBeginEvent(Customer c) { 
     super(c.getTime());
     this.c = c;
+    this.time = c.getTime();
   }
 
   // ----- Methods ------------------------
@@ -28,6 +28,6 @@ class ServiceBeginEvent extends Event {
   
   @Override
   public String toString() { 
-    return String.format("%.3f: %s service begin (by %s)", super.getTime(), c, c.getCounter());
+    return String.format("%s: %s service begin (by %s)", super.toString(), c, c.getCounter());
   }
 }

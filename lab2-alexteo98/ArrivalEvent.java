@@ -10,10 +10,12 @@ class ArrivalEvent extends Event {
   // ------ Data ---------------------------------
   private Shop shop;
   private Customer c; 
+  private double time;
 
   // ----- Constructors --------------------------
   public ArrivalEvent(Customer c, Shop shop) { 
     super(c.getTime());
+    this.time = c.getTime();
     this.c = c;
     this.shop = shop;
   }
@@ -21,7 +23,7 @@ class ArrivalEvent extends Event {
   // ----- Methods ------------------------------
   @Override
   public String toString() { 
-    return String.format("%.3f: %s arrives",super.getTime(), c);
+    return String.format("%s: %s arrives", super.toString(), c);
   }
 
   public Event[] simulate() { 
