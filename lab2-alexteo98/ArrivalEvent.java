@@ -21,7 +21,7 @@ class ArrivalEvent extends Event {
   // ----- Methods ------------------------------
   @Override
   public String toString() { 
-    return String.format("%s : %s arrives",super.getTime(), c);
+    return String.format("%.3f: %s arrives",super.getTime(), c);
   }
 
   public Event[] simulate() { 

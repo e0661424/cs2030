@@ -25,7 +25,7 @@ class Customer {
     this();
     this.time=time;
     this.serviceTime=serviceTime;
-    System.out.println(String.format("ID:%d, time:%f, serviceTime:%f",this.customerID, this.time, this.serviceTime));
+   // System.out.println(String.format("ID:%d, time:%f, serviceTime:%f",this.customerID, this.time, this.serviceTime));
   }
 
   // ----- Getter and Setters ------------

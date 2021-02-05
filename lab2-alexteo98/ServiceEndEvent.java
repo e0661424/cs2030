@@ -20,13 +20,13 @@ class ServiceEndEvent extends Event {
 
   // ----- Methods ------------------------
   public Event[] simulate() { 
-    // release counter
+    c.getCounter().releaseCounter();
     return new Event[] { new DepartureEvent(c)};
   }
   
   @Override
   public String toString() { 
-    return String.format("%f : %s service done (by %s)", 
+    return String.format("%.3f: %s service done (by %s)", 
         super.getTime(), c, c.getCounter()); 
     // create getcounter method in customer class to retreive currrent counter - done
   }

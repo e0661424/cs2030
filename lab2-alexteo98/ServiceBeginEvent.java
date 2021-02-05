@@ -28,6 +28,6 @@ class ServiceBeginEvent extends Event {
   
   @Override
   public String toString() { 
-    return String.format("%s : %s service begin (by %s)", super.getTime(), c, c.getCounter());
+    return String.format("%.3f: %s service begin (by %s)", super.getTime(), c, c.getCounter());
   }
 }
