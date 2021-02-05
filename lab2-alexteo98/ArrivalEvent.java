@@ -23,7 +23,7 @@ class ArrivalEvent extends Event {
   // ----- Methods ------------------------------
   @Override
   public String toString() { 
-    return String.format("%s: %s arrives", super.toString(), c);
+    return String.format("%s: %s arrives %s", super.toString(), c, shop.getQueue());
   }
 
   public Event[] simulate() { 
@@ -32,7 +32,7 @@ class ArrivalEvent extends Event {
     } else { 
           if (shop.getQueue().enq(this.c)) { 
             //queued;
-            System.out.println(String.format("%s has joined Queue %s", this.c, this.shop.getQueue()));
+            System.out.println(String.format("%s: %s has joined Queue %s",super.toString(), this.c, this.shop.getQueue()));
             return new Event[] {};
         } else { 
             return depart();
