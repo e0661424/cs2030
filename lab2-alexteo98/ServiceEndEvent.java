@@ -14,7 +14,7 @@ class ServiceEndEvent extends Event {
 
   // ----- Constructors ---------------------
   public ServiceEndEvent(Customer c) { 
-    super(time);
+    super(c.getTime());
     this.c = c;
   }
 
@@ -26,7 +26,8 @@ class ServiceEndEvent extends Event {
   
   @Override
   public String toString() { 
-    return String.format("%d : %s service done (by %s)", 
-        c.getTime(), c, c.getCounter()); // create getcounter method in customer class to retreive currrent counter - done
+    return String.format("%f : %s service done (by %s)", 
+        super.getTime(), c, c.getCounter()); 
+    // create getcounter method in customer class to retreive currrent counter - done
   }
 }

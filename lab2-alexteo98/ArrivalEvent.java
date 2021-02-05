@@ -10,48 +10,42 @@ class ArrivalEvent extends Event {
   // ------ Data ---------------------------------
   private Shop shop;
   private Customer c; 
-  private Queue q;
-  private Counter ctr;
-  private Counter[] ctrs;
-  private double time;
-  private double serviceTime;
 
   // ----- Constructors --------------------------
-  public ArrivalEvent(Customer c, Shop shop, Queue q) { 
+  public ArrivalEvent(Customer c, Shop shop) { 
     super(c.getTime());
     this.c = c;
     this.shop = shop;
-    this.q = q;
   }
 
   // ----- Methods ------------------------------
   @Override
   public String toString() { 
-    return super.toString() + String.format(": %s arrives", c);
+    return String.format("%s : %s arrives",super.getTime(), c);
   }
 
   public Event[] simulate() { 
-    // ----- check counter availability
-    // ----- if no Counters, call depart() 
-    // ----- else call serve()
-   
-    // TODO
-    // shop.get available counters
-    // if counter.avail -> serve(cust)
-    // else { 
-    //  if (queue.full) { 
-    //    depart();
-    //  }else { 
-    //    queue();
-    //  }
-    // }
+    if (shop.counterAvailable()) { 
+        return serve();
+    } else { 
+        /*if (shop.getQueue().isFull()) { 
+            return depart();
+        } else { 
+            return joinQ();
+        }*/
+      return depart();
+    }
   }
 
+  private Event[] joinQ() { 
+      return new Event[]{new WaitEvent(this.c, this.shop)};
+  }
   public Event[] serve() { 
-    return new Event[] {new ServiceBeginEvent(this.c, this.ctr, this.time, this.serviceTime)};
+    c.setCounter(shop.getAvailableCounter());
+    return new Event[] {new ServiceBeginEvent(this.c)};
   }
 
   public Event[] depart() { 
-    return new Event[] {new DepartureEvent(this.c, this.time)};
+    return new Event[] {new DepartureEvent(this.c)};
   }
 }

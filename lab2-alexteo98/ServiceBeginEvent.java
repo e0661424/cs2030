@@ -21,14 +21,13 @@ class ServiceBeginEvent extends Event {
 
   // ----- Methods ------------------------
   public Event[] simulate() { 
-    // occupy counter
+    c.getCounter().occupyCounter(c);
     c = c.setTime(c.getTime() + c.getServiceTime());
     return new Event[] {new ServiceEndEvent(c)};
   }
   
   @Override
   public String toString() { 
-    return super.toString() + String.format(": %s service begin (by %s)", 
-        c, ctr);
+    return String.format("%s : %s service begin (by %s)", super.getTime(), c, c.getCounter());
   }
 }
