@@ -31,18 +31,19 @@ class ArrivalEvent extends Event {
       return serve();
     } else {
       if (shop.getQueue().isFull()) { 
-          return depart();
-      } else  { 
-          System.out.println(String.format("%s: %s joined queue %s",super.toString(), this.c, this.shop.getQueue()));
-          shop.getQueue().enq(this.c);
-          return new Event[] {};
+        return depart();
+      } else { 
+        return joinQ();
       }
     }
   }
 
   private Event[] joinQ() { 
-    return new Event[]{new WaitEvent(this.c, this.shop)};
+    System.out.println(String.format("%s: %s joined queue %s",super.toString(), this.c, this.shop.getQueue()));
+    shop.getQueue().enq(this.c);
+    return new Event[] {};
   }
+
   public Event[] serve() { 
     c.setCounter(shop.getAvailableCounter());
     return new Event[] {new ServiceBeginEvent(this.c, this.shop)};

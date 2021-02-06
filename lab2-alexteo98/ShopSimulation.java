@@ -7,15 +7,15 @@ import java.util.Scanner;
  * @version CS2030S AY20/21 Semester 2
  */ 
 class ShopSimulation extends Simulation {
-    
+
   // ----- Data ----------------------------------
-  
+
   /** 
    * The list of customer arrival events to populate
    * the simulation with.
    */
   public Event[] initEvents;
- 
+
   private Shop shop;
   private Queue q;
   private int queueLen;
@@ -33,24 +33,24 @@ class ShopSimulation extends Simulation {
    *           sequence of (arrival time, service time) pair, each
    *           pair represents a customer.
    */
-    
+
   public ShopSimulation(Scanner sc) { 
-    
+
     this.noOfCustomers = sc.nextInt();
     this.noOfCounters = sc.nextInt();
     this.queueLen=sc.nextInt();
 
     initEvents = new Event[noOfCustomers];
-    
+
     createTimings(sc);
     q = new Queue(queueLen);
     shop = new Shop(noOfCustomers, noOfCounters, timings);
     shop.setQueue(q);
     populateEvents();
-}
+  }
 
   // ----- Methods ----------------------------
-  
+
   /**
    * Retrieve an array of events to populate the 
    * simulator with.
@@ -63,19 +63,18 @@ class ShopSimulation extends Simulation {
   }
 
   public double[][] createTimings(Scanner sc) { 
-      timings = new double[noOfCustomers][2];
-      for (int i = 0; i < noOfCustomers; i++) { 
-          timings[i][0] = sc.nextDouble();
-          timings[i][1] = sc.nextDouble();
-      }
-      return timings;
+    timings = new double[noOfCustomers][2];
+    for (int i = 0; i < noOfCustomers; i++) { 
+      timings[i][0] = sc.nextDouble();
+      timings[i][1] = sc.nextDouble();
+    }
+    return timings;
   }
 
   public void populateEvents() { 
     Customer[] allCustomers = shop.getCustomers();
-      for (int i = 0;i < noOfCustomers; i++) { 
-         // initEvents[i] = new ArrivalEvent((Customer)q.deq(), shop);
-         initEvents[i] = new ArrivalEvent(allCustomers[i], shop);
-      }
+    for (int i = 0;i < noOfCustomers; i++) { 
+      initEvents[i] = new ArrivalEvent(allCustomers[i], shop);
+    }
   }
 }

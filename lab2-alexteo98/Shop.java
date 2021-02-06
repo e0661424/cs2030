@@ -1,6 +1,6 @@
 class Shop { 
   // ----- Data --------------------------  
-  
+
   /** number of customers in shop */
   private int noOfCustomers;
 
@@ -26,15 +26,15 @@ class Shop {
   }
 
   // ----- Getter and Setters ---------------------
-  
+
   public Queue getQueue() { 
-      return this.q;
+    return this.q;
   }
   public void setQueue(Queue q) { 
-      this.q = q;
+    this.q = q;
   }
   public Customer[] getCustomers() { 
-      return this.allCustomers;
+    return this.allCustomers;
   }
 
   // ----- Methods -----------------------
@@ -42,19 +42,19 @@ class Shop {
     // returns an available counter, if none available, return null value 
     for (int i = 0; i < noOfCounters; i++) { 
       if (allCounters[i].available()) { 
-          return allCounters[i];
+        return allCounters[i];
       } else {/*not needed*/}
     }
     return null;
   }
 
   public boolean counterAvailable() { 
-      Counter ctr = getAvailableCounter();
-      if (ctr == null) { 
-          return false;
-      } else  { 
-          return true;
-      }
+    Counter ctr = getAvailableCounter();
+    if (ctr == null) { 
+      return false;
+    } else  { 
+      return true;
+    }
   }
 
   private Counter[] createCounters(int noOfCounters) {
@@ -78,6 +78,6 @@ class Shop {
   }
 
   public Customer nextCustomer() { 
-      return (Customer)q.deq();
+    return (Customer)q.deq();
   }
 }
