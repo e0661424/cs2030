@@ -38,7 +38,7 @@ class ShopSimulation extends Simulation {
 
     this.noOfCustomers = sc.nextInt();
     this.noOfCounters = sc.nextInt();
-    this.queueLen=sc.nextInt();
+    this.queueLen = sc.nextInt();
 
     initEvents = new Event[noOfCustomers];
 
@@ -73,7 +73,7 @@ class ShopSimulation extends Simulation {
 
   public void populateEvents() { 
     Customer[] allCustomers = shop.getCustomers();
-    for (int i = 0;i < noOfCustomers; i++) { 
+    for (int i = 0; i < noOfCustomers; i++) { 
       initEvents[i] = new ArrivalEvent(allCustomers[i], shop);
     }
   }

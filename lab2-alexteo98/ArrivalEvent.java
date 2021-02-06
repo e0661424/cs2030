@@ -39,7 +39,8 @@ class ArrivalEvent extends Event {
   }
 
   private Event[] joinQ() { 
-    System.out.println(String.format("%s: %s joined queue %s",super.toString(), this.c, this.shop.getQueue()));
+    System.out.println(String.format("%s: %s joined queue %s", 
+          super.toString(), this.c, this.shop.getQueue()));
     shop.getQueue().enq(this.c);
     return new Event[] {};
   }
