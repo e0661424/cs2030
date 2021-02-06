@@ -11,27 +11,23 @@ class ServiceBeginEvent extends Event {
   private Customer c;
   private Counter ctr;
   private double time;
-  private double serviceTime;
 
   // ----- Construcctors -------------------
-  public ServiceBeginEvent(Customer c, Counter ctr, double time, double serviceTime) { 
-    super(time);
-    this.serviceTime = serviceTime;
+  public ServiceBeginEvent(Customer c) { 
+    super(c.getTime());
     this.c = c;
-    this.ctr = ctr;
-    this.time = time;
+    this.time = c.getTime();
   }
 
   // ----- Methods ------------------------
   public Event[] simulate() { 
-    ctr.occupyCounter(c);
-    double endTime = this.time + this.serviceTime;
-    return new Event[] {new ServiceEndEvent(c, ctr, endTime)};
+    c.getCounter().occupyCounter(c);
+    c = c.setTime(c.getTime() + c.getServiceTime());
+    return new Event[] {new ServiceEndEvent(c)};
   }
   
   @Override
   public String toString() { 
-    return super.toString() + String.format(": Customer %d service begin (by Counter %d)", 
-        c.getCustomerID(), ctr.getCounterID());
+    return String.format("%s: %s service begin (by %s)", super.toString(), c, c.getCounter());
   }
 }

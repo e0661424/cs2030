@@ -10,25 +10,26 @@ class ServiceEndEvent extends Event {
   // ----- Data ---------------------------
   private Counter ctr;
   private Customer c;
+  private double time;
 
 
   // ----- Constructors ---------------------
-  public ServiceEndEvent(Customer c, Counter ctr, double time) { 
-    super(time);
+  public ServiceEndEvent(Customer c) { 
+    super(c.getTime());
     this.c = c;
-    this.ctr = ctr;
+    this.time = c.getTime();
   }
 
   // ----- Methods ------------------------
   public Event[] simulate() { 
-    ctr.releaseCounter();
-    double time = super.getTime();
-    return new Event[] { new DepartureEvent(c, time)};
+    c.getCounter().releaseCounter();
+    return new Event[] { new DepartureEvent(c)};
   }
   
   @Override
   public String toString() { 
-    return super.toString() + String.format(": Customer %d service done (by Counter %d)", 
-        c.getCustomerID(), ctr.getCounterID());
+    return String.format("%s: %s service done (by %s)", 
+        super.toString(), c, c.getCounter()); 
+    // create getcounter method in customer class to retreive currrent counter - done
   }
 }

@@ -47,11 +47,18 @@ class Counter {
     this.currentCustomer = null;
   }
 
+  /*
   public String toString(Customer c) { 
     if (available) { 
       return ("Currently serving:" + c.getCustomerID());
     } else { 
       return ("Currently empty");
     }
+  }
+  */
+
+  @Override
+  public String toString() { 
+      return String.format("S%d",this.counterID);
   }
 }

@@ -11,19 +11,18 @@ class DepartureEvent extends Event {
   private Customer c;
   
   // ----- Constructors ---------------
-  public DepartureEvent(Customer c, double time) { 
-    super(time);
+  public DepartureEvent(Customer c) { 
+    super(c.getTime());
     this.c = c;
   }
 
   // ----- Methods --------------------
   @Override
   public String toString() { 
-    return super.toString() + String.format(": Customer %d departed", c.getCustomerID());
+    return super.toString() + String.format(": %s departed", c);
   }
 
   public Event[] simulate() { 
     return new Event[] { };
-    
   }
 }

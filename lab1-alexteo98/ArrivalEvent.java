@@ -8,58 +8,46 @@ class ArrivalEvent extends Event {
   */
 
   // ------ Data ---------------------------------
+  private Shop shop;
   private Customer c; 
-  private Counter ctr;
-  private Counter[] ctrs;
   private double time;
-  private double serviceTime;
 
   // ----- Constructors --------------------------
-  public ArrivalEvent(Customer c, Counter[] ctrs, double time, double serviceTime) { 
-    //constructor
-    super(time);
-    this.time = time;
+  public ArrivalEvent(Customer c, Shop shop) { 
+    super(c.getTime());
+    this.time = c.getTime();
     this.c = c;
-    this.serviceTime = serviceTime;
-    this.ctrs = ctrs;
+    this.shop = shop;
   }
 
   // ----- Methods ------------------------------
   @Override
   public String toString() { 
-    return super.toString() + String.format(": Customer %d arrives", c.getCustomerID());
+    return String.format("%s: %s arrives", super.toString(), c);
   }
 
   public Event[] simulate() { 
-    // ----- check counter availability
-    // ----- if no Counters, call depart() 
-    // ----- else call serve()
-    int counterNo = availableCounters(ctrs);
-    if (counterNo == -1) { 
-      return depart();
+    if (shop.counterAvailable()) { 
+        return serve();
     } else { 
-      return serve();
+        /*if (shop.getQueue().isFull()) { 
+            return depart();
+        } else { 
+            return joinQ();
+        }*/
+      return depart();
     }
   }
 
+  private Event[] joinQ() { 
+      return new Event[]{new WaitEvent(this.c, this.shop)};
+  }
   public Event[] serve() { 
-    return new Event[] {new ServiceBeginEvent(this.c, this.ctr, this.time, this.serviceTime)};
+    c.setCounter(shop.getAvailableCounter());
+    return new Event[] {new ServiceBeginEvent(this.c)};
   }
 
   public Event[] depart() { 
-    return new Event[] {new DepartureEvent(this.c, this.time)};
-  }
-
-  private int availableCounters(Counter[] ctrs) { 
-    // ----- default value of -1 -> no counters available
-    int counterNo = -1;
-    for (int i = 0; i < ctrs.length; i++) { // ----- Loop through to find available counter;
-      if (ctrs[i].available()) {       // ----- Breaks if found available counter
-        counterNo = i;
-        this.ctr = ctrs[i];
-        break;
-      } else { /* not needed */ }
-    }
-    return counterNo;
+    return new Event[] {new DepartureEvent(this.c)};
   }
 }

@@ -16,11 +16,12 @@ class ShopSimulation extends Simulation {
    */
   public Event[] initEvents;
  
+  private Shop shop;
+  private Queue q;
+  private int queueLen;
   private int noOfCustomers = 0;
   private int noOfCounters = 0;
   private double[][] timings;
-  private Customer[] customers;
-  private Counter[] counters;
 
   // ----- Constructors -------------------------
   /** 
@@ -37,10 +38,16 @@ class ShopSimulation extends Simulation {
     
     this.noOfCustomers = sc.nextInt();
     this.noOfCounters = sc.nextInt();
+   // this.queueLen=sc.nextInt();
+
+    initEvents = new Event[noOfCustomers];
     
-    initialiseValues(sc);
-    startSimulation();
-  }
+    createTimings(sc);
+  //  q = new Queue(queueLen);
+    shop = new Shop(noOfCustomers, noOfCounters, timings);
+   // shop.setQueue(q);
+    populateEvents();
+}
 
   // ----- Methods ----------------------------
   
@@ -54,50 +61,21 @@ class ShopSimulation extends Simulation {
   public Event[] getInitialEvents() { 
     return initEvents;
   }
-  
-  private void initialiseValues(Scanner sc) { 
-   
-    initEvents = new Event[noOfCustomers];
-    this.counters = createCounters(noOfCounters);
-    this.customers = createCustomers(noOfCustomers);
-    timings = createTimings(noOfCustomers, sc);
+
+  public double[][] createTimings(Scanner sc) { 
+      timings = new double[noOfCustomers][2];
+      for (int i = 0; i < noOfCustomers; i++) { 
+          timings[i][0] = sc.nextDouble();
+          timings[i][1] = sc.nextDouble();
+      }
+      return timings;
   }
 
-  public void startSimulation() { 
-   
-    for (int i = 0; i < noOfCustomers; i++) { 
-      double arrivalTime = timings[i][0];
-      double serviceTime = timings[i][1];
-      Customer c = customers[i];
-      initEvents[i] = new ArrivalEvent(c, counters, timings[i][0], timings[i][1]);
-    }
-  }
-
-  private Counter[] createCounters(int noOfCounters) { 
-    
-    Counter[] counters = new Counter[noOfCounters];
-    for (int i = 0; i < noOfCounters; i++) { 
-      counters[i] = new Counter();
-    }
-    return counters;
-  }
-
-  private Customer[] createCustomers(int noOfCustomers) { 
-    
-    Customer[] customers = new Customer[noOfCustomers];
-    for (int i = 0; i < noOfCustomers; i++) { 
-      customers[i] = new Customer();
-    }
-    return customers;
-  }
-
-  private double[][] createTimings(int noOfCustomers, Scanner sc) { 
-    
-    double[][] timings = new double [noOfCustomers] [2];
-    for (int i = 0; i < noOfCustomers; i++) { 
-      timings[i][0] = sc.nextDouble();
-      timings[i][1] = sc.nextDouble();
-    }
-    return timings;
+  public void populateEvents() { 
+    Customer[] allCustomers = shop.getCustomers();
+      for (int i = 0;i < noOfCustomers; i++) { 
+         // initEvents[i] = new ArrivalEvent((Customer)q.deq(), shop);
+         initEvents[i] = new ArrivalEvent(allCustomers[i], shop);
+      }
   }
 }
