@@ -23,6 +23,7 @@ class ServiceBeginEvent extends Event {
 
   // ----- Methods ------------------------
   public Event[] simulate() { 
+//    System.out.println(String.format("%s", c.getCounter()));
     c.getCounter().occupyCounter(c);
     c = c.setTime(c.getTime() + c.getServiceTime());
     return new Event[] {new ServiceEndEvent(this.c, this.shop)};

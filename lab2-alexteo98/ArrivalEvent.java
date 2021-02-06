@@ -23,20 +23,20 @@ class ArrivalEvent extends Event {
   // ----- Methods ------------------------------
   @Override
   public String toString() { 
-    return String.format("%s: %s arrives %s", super.toString(), c, shop.getQueue());
+    return String.format("%s: %s arrived %s", super.toString(), c, shop.getQueue());
   }
 
   public Event[] simulate() { 
     if (shop.counterAvailable()) { 
       return serve();
-    } else { 
-          if (shop.getQueue().enq(this.c)) { 
-            //queued;
-            System.out.println(String.format("%s: %s has joined Queue %s",super.toString(), this.c, this.shop.getQueue()));
-            return new Event[] {};
-        } else { 
-            return depart();
-        }
+    } else {
+      if (shop.getQueue().isFull()) { 
+          return depart();
+      } else  { 
+          System.out.println(String.format("%s: %s joined queue %s",super.toString(), this.c, this.shop.getQueue()));
+          shop.getQueue().enq(this.c);
+          return new Event[] {};
+      }
     }
   }
 
