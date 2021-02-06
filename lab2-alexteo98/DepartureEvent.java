@@ -35,8 +35,9 @@ class DepartureEvent extends Event {
       return nextService();
     }
   }
+
   private Event[] nextService() { 
-    Customer nextCustomer = (Customer)this.shop.getQueue().deq();
+    Customer nextCustomer = (Customer) this.shop.getQueue().deq();
     nextCustomer.setTime(super.getTime());
     nextCustomer.setCounter(this.c.getCounter());
     return new Event[] {new ServiceBeginEvent(nextCustomer, this.shop) };    

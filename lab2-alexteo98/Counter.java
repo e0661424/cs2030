@@ -1,11 +1,11 @@
 class Counter { 
 
   /**
-  * This class implements a Counter.
-  *
-  * @author Alex Teo (Lab16A)
-  * @version CS2030S AY20/21 Semester 2
-  */
+   * This class implements a Counter.
+   *
+   * @author Alex Teo (Lab16A)
+   * @version CS2030S AY20/21 Semester 2
+   */
 
   // ----- Data -------------------------------------
   /** Availability of counter. */
@@ -87,6 +87,6 @@ class Counter {
 
   @Override
   public String toString() { 
-      return String.format("S%d",this.counterID);
+    return String.format("S%d", this.counterID);
   }
 }

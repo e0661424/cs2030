@@ -8,7 +8,7 @@ class Customer {
    */
 
   // ----- Data ---------------------------
-  
+
   /** ID Value of Customer Object. */
   private int customerID = 0;
 
@@ -20,7 +20,7 @@ class Customer {
 
   /** Time of event start. */
   private double time;
-  
+
   /** Time needed for serving particular Customer. */
   private double serviceTime;
 
@@ -50,8 +50,8 @@ class Customer {
    */
   public Customer(double time, double serviceTime) { 
     this();
-    this.time=time;
-    this.serviceTime=serviceTime;
+    this.time = time;
+    this.serviceTime = serviceTime;
   }
 
   // ----- Getter and Setters ------------
@@ -79,7 +79,7 @@ class Customer {
    * @return The counter serving this customer.
    * */
   public Counter getCounter() { 
-      return this.currentCounter;
+    return this.currentCounter;
   }
 
   /**
@@ -88,7 +88,7 @@ class Customer {
    * @return The time of event start.
    */
   public double getTime() { 
-      return this.time;
+    return this.time;
   }
 
   /**
@@ -99,8 +99,8 @@ class Customer {
    * @return This customer object.
    */
   public Customer setTime(double updatedTime) { 
-      this.time=updatedTime;
-      return this;
+    this.time = updatedTime;
+    return this;
   }
 
   /**
@@ -109,11 +109,11 @@ class Customer {
    * @return serviceTime required to serve this customer.
    */
   public double getServiceTime() { 
-      return this.serviceTime;
+    return this.serviceTime;
   }
 
   @Override
   public String toString() { 
-    return String.format("C%d",this.customerID);
+    return String.format("C%d", this.customerID);
   }
 }

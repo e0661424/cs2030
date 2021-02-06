@@ -30,9 +30,11 @@ class Shop {
   public Queue getQueue() { 
     return this.q;
   }
+
   public void setQueue(Queue q) { 
     this.q = q;
   }
+
   public Customer[] getCustomers() { 
     return this.allCustomers;
   }
@@ -43,7 +45,7 @@ class Shop {
     for (int i = 0; i < noOfCounters; i++) { 
       if (allCounters[i].available()) { 
         return allCounters[i];
-      } else {/*not needed*/}
+      } else { /*not needed*/ }
     }
     return null;
   }
@@ -78,6 +80,6 @@ class Shop {
   }
 
   public Customer nextCustomer() { 
-    return (Customer)q.deq();
+    return (Customer) q.deq();
   }
 }
