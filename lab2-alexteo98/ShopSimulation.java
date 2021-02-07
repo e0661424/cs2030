@@ -62,7 +62,8 @@ class ShopSimulation extends Simulation {
     return initEvents;
   }
 
-  public double[][] createTimings(Scanner sc) { 
+
+  private double[][] createTimings(Scanner sc) { 
     timings = new double[noOfCustomers][2];
     for (int i = 0; i < noOfCustomers; i++) { 
       timings[i][0] = sc.nextDouble();
