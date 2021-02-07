@@ -8,16 +8,22 @@ class ServiceBeginEvent extends Event {
    */
 
   // ----- Data --------------------------
+  /** Customer currently being served. */
   private Customer c;
-  private Counter ctr;
-  private double time;
+
+  /** Shop at which this event is serving. */
   private Shop shop;
 
   // ----- Construcctors -------------------
+  /**
+   * Constructor for Service Begin Event.
+   *
+   * @param c Customer that is currently being served.
+   * @param shop Shop at which customer is being served.
+   */
   public ServiceBeginEvent(Customer c, Shop shop) { 
     super(c.getTime());
     this.c = c;
-    this.time = c.getTime();
     this.shop = shop;
   }
 

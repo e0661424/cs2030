@@ -8,17 +8,22 @@ class ServiceEndEvent extends Event {
    */ 
 
   // ----- Data ---------------------------
-  private Counter ctr;
+  /** Customer who just ended service. */
   private Customer c;
-  private double time;
+
+  /** Shop at which service end event is happening. */
   private Shop shop;
 
-
   // ----- Constructors ---------------------
+  /**
+   * Constructor for Service End Event.
+   *
+   * @param c Customer that just ended service.
+   * @param shop Shop that Service End event is happening.
+   */
   public ServiceEndEvent(Customer c, Shop shop) { 
     super(c.getTime());
     this.c = c;
-    this.time = c.getTime();
     this.shop = shop;
   }
 

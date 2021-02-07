@@ -8,10 +8,11 @@ class ArrivalEvent extends Event {
    */
 
   // ------ Data ---------------------------------
-  /**  Shop object  */
+  /** Shop object involved in the arrival event. */
   private Shop shop;
+
+  /** Customer that just arrived in the store. */
   private Customer c; 
-  private double time;
 
   // ----- Constructors --------------------------
   /**
@@ -22,7 +23,6 @@ class ArrivalEvent extends Event {
    */
   public ArrivalEvent(Customer c, Shop shop) { 
     super(c.getTime());
-    this.time = c.getTime();
     this.c = c;
     this.shop = shop;
   }
@@ -44,6 +44,7 @@ class ArrivalEvent extends Event {
       }
     }
   }
+
   /**
    * Prints a line that Customer has joined queue and enqueues customer into shop queue.
    *
@@ -55,6 +56,7 @@ class ArrivalEvent extends Event {
     shop.getQueue().enq(this.c);
     return new Event[] {};
   }
+
   /**
    * Sets a counter to a customer object and return a Service Begin Event.
    *
