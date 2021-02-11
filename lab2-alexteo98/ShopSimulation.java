@@ -6,7 +6,8 @@ import java.util.Scanner;
  * @author Alex Teo (Lab16A)
  * @version CS2030S AY20/21 Semester 2
  */ 
-class ShopSimulation extends Simulation {
+
+class ShopSimulation extends Simulation { 
 
   // ----- Data ----------------------------------
 
@@ -16,11 +17,22 @@ class ShopSimulation extends Simulation {
    */
   public Event[] initEvents;
 
+  /** Shop object that the simulation will be carried out on. */
   private Shop shop;
+
+  /** Queue object to be created and passed to shop. */
   private Queue q;
+
+  /** Max length of queue allowed in shop.*/
   private int queueLen;
+
+  /** Number of Customers to be instantiated. */
   private int noOfCustomers = 0;
+
+  /** Number of Counters to be instantiated. */
   private int noOfCounters = 0;
+
+  /** Array containing the Arrival and Service Times. */
   private double[][] timings;
 
   // ----- Constructors -------------------------
@@ -62,7 +74,16 @@ class ShopSimulation extends Simulation {
     return initEvents;
   }
 
-  public double[][] createTimings(Scanner sc) { 
+  /** 
+   * Creates an array of Arrival time and Serivice Time
+   * of customers.
+   *
+   * @param sc  Scanner object scans for 2 values per customer
+   *            and assigns them as Arrival and Service Time.
+   *
+   * @return An array of Arrival and Service Time.
+   */
+  private double[][] createTimings(Scanner sc) { 
     timings = new double[noOfCustomers][2];
     for (int i = 0; i < noOfCustomers; i++) { 
       timings[i][0] = sc.nextDouble();
@@ -71,6 +92,10 @@ class ShopSimulation extends Simulation {
     return timings;
   }
 
+  /**
+   * Populates the simulator with an array of
+   * Arrival Events.
+   */
   public void populateEvents() { 
     Customer[] allCustomers = shop.getCustomers();
     for (int i = 0; i < noOfCustomers; i++) { 

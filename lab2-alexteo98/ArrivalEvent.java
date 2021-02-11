@@ -8,14 +8,21 @@ class ArrivalEvent extends Event {
    */
 
   // ------ Data ---------------------------------
+  /** Shop object involved in the arrival event. */
   private Shop shop;
+
+  /** Customer that just arrived in the store. */
   private Customer c; 
-  private double time;
 
   // ----- Constructors --------------------------
+  /**
+   * Constructor for an Arrival Event.
+   *
+   * @param c Customer object that arrived at the shop.
+   * @param shop Shop object that the customer arrived to.
+   */
   public ArrivalEvent(Customer c, Shop shop) { 
     super(c.getTime());
-    this.time = c.getTime();
     this.c = c;
     this.shop = shop;
   }
@@ -38,6 +45,11 @@ class ArrivalEvent extends Event {
     }
   }
 
+  /**
+   * Prints a line that Customer has joined queue and enqueues customer into shop queue.
+   *
+   * @return Empty event.
+   */
   private Event[] joinQ() { 
     System.out.println(String.format("%s: %s joined queue %s", 
           super.toString(), this.c, this.shop.getQueue()));
@@ -45,12 +57,22 @@ class ArrivalEvent extends Event {
     return new Event[] {};
   }
 
-  public Event[] serve() { 
+  /**
+   * Sets a counter to a customer object and return a Service Begin Event.
+   *
+   * @return A Service Begin Event of the customer and the shop.
+   */
+  private Event[] serve() { 
     c.setCounter(shop.getAvailableCounter());
-    return new Event[] {new ServiceBeginEvent(this.c, this.shop)};
+    return new Event[] { new ServiceBeginEvent(this.c, this.shop)};
   }
 
-  public Event[] depart() { 
-    return new Event[] {new DepartureEvent(this.c, this.shop)};
+  /**
+   * Returns a Departure Event.
+   *
+   * @return A Departure Event of the customer and the shop.
+   */
+  private Event[] depart() { 
+    return new Event[] { new DepartureEvent(this.c, this.shop)};
   }
 }
