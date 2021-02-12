@@ -1,4 +1,4 @@
-class Counter { 
+class Counter implements Comparable<Counter> { 
 
   /**
    * This class implements a Counter.
@@ -20,6 +20,8 @@ class Counter {
   /** Customer object for current Customer served by this counter, null is not occupied. */
   private Customer currentCustomer;
 
+  /** Queue for each individual Counter. */
+  private Queue<Counter> q;
 
   // ----- Constructors -----------------------------
   /**
@@ -86,7 +88,7 @@ class Counter {
   }
 
   @Override
-  public int compareTo() { 
+  public int compareTo(Counter c) { 
       
   }
 
