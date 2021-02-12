@@ -27,7 +27,7 @@ class Counter implements Comparable<Counter> {
   /**
    * Constructor for Counter.
    * 
-   * initialise counter ID for current Counter object.
+   * Initialise counter ID for current Counter object.
    * Sets up counter ID for next instantiation of Counter object.
    */
   public Counter() { 
@@ -66,6 +66,8 @@ class Counter implements Comparable<Counter> {
 
   // ----- Methods -----------------------------------
 
+  //private 
+
   /**
    * Sets counter to occupied.
    * Links a counter to a customer.
@@ -79,17 +81,25 @@ class Counter implements Comparable<Counter> {
 
   /**
    * Sets counter to available after customer's service ends.
-   * Removes the counter - customer link.
-   *
+   * Removes the counter - customer link 
    */
   public void releaseCounter() { 
     this.available = true;
     this.currentCustomer = null;
   }
 
+  /**
+   * Gets the current queue for this counter.
+   *
+   * @return queue for this counter.
+   */
+  public Queue getQueue() { 
+      return this.q;
+  }
+
   @Override
   public int compareTo(Counter c) { 
-      
+    return 0;
   }
 
   @Override

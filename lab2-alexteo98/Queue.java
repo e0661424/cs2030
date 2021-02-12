@@ -6,7 +6,7 @@
  * @author Alex Teo (Lab16A)
  * @version CS2030S AY20/21 Semester 2
  */
-class Queue {
+class Queue<T> {
   /** An array to store the items in the queue. */
   private Object[] items;
 
@@ -41,7 +41,7 @@ class Queue {
    * @param e The item to put in the queue.
    * @return false if the queue is full; true if e is added successfully.
    */
-  public boolean enq(Object e) {
+  public boolean enq(T e) {
     if (this.isFull()) {
       return false;
     }
@@ -61,11 +61,11 @@ class Queue {
    *
    * @return null if the queue is empty; the object removed from the queue otherwise.
    */
-  public Object deq() {
+  public T deq() {
     if (this.isEmpty()) {
       return null;
     }
-    Object item = this.items[this.first];
+    T item = (T) this.items[this.first];
     this.first = (this.first + 1) % this.maxSize;
     this.len -= 1;
     return item;
