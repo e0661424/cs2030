@@ -21,7 +21,10 @@ class Counter implements Comparable<Counter> {
   private Customer currentCustomer;
 
   /** Queue for each individual Counter. */
-  private Queue<Counter> q;
+  private Queue<Customer> q;
+
+  private Event[] emptyEvent = new Event[] {};
+  private Shop shop;
 
   // ----- Constructors -----------------------------
   /**
@@ -30,12 +33,17 @@ class Counter implements Comparable<Counter> {
    * Initialise counter ID for current Counter object.
    * Sets up counter ID for next instantiation of Counter object.
    */
-  public Counter() { 
+  public Counter(Shop shop) { 
     counterID = lastCounterID;
     lastCounterID++;
+    this.shop = shop;
   }
 
   // ----- Getters and Setters ----------------------
+
+  public Shop getShop() { 
+      return this.shop;
+  }
 
   /**
    *  Gets the specific counter ID of counter object.
@@ -64,6 +72,7 @@ class Counter implements Comparable<Counter> {
     return this.currentCustomer;
   }
 
+
   // ----- Methods -----------------------------------
 
   //private 
@@ -89,6 +98,17 @@ class Counter implements Comparable<Counter> {
   }
 
   /**
+   *
+   */
+  public boolean isCounterFull() { 
+      if (this.q.isFull() && !this.available) { 
+        return true;  
+      } else {
+        return false;
+      }
+  }
+
+  /**
    * Gets the current queue for this counter.
    *
    * @return queue for this counter.
@@ -97,9 +117,30 @@ class Counter implements Comparable<Counter> {
       return this.q;
   }
 
+  public Event[] nextCustomer() { 
+      if (q.isEmpty()) { 
+          return emptyEvent;
+      } else  {
+        Customer nextCustomer = (Customer) this.q.deq();
+          return new Event[] {new ServiceBeginEvent(nextCustomer, this)};
+      }
+  }
+
   @Override
   public int compareTo(Counter c) { 
-    return 0;
+    Counter temp;
+    if (this.q.length() < c.getQueue().length()) { 
+        return -1;
+    } else if (this.q.length() > c.getQueue().length()) { 
+        return 1;
+    } else {
+      // same queue length
+      if (this.counterID < c.getCounterID()) { 
+          return -1;
+      }else { 
+          return 1;
+      }
+    }
   }
 
   @Override

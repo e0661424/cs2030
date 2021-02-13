@@ -12,7 +12,7 @@ class ServiceEndEvent extends Event {
   private Customer c;
 
   /** Shop at which service end event is happening. */
-  private Shop shop;
+  private Counter ctr;
 
   // ----- Constructors ---------------------
   /**
@@ -21,21 +21,21 @@ class ServiceEndEvent extends Event {
    * @param c Customer that just ended service.
    * @param shop Shop that Service End event is happening.
    */
-  public ServiceEndEvent(Customer c, Shop shop) { 
+  public ServiceEndEvent(Customer c, Counter ctr) { 
     super(c.getTime());
     this.c = c;
-    this.shop = shop;
+    this.ctr = ctr;
   }
 
   // ----- Methods ------------------------
   public Event[] simulate() { 
     c.getCounter().releaseCounter();
-    return new Event[] { new DepartureEvent(this.c, this.shop)};
+    return new Event[] { new DepartureEvent(this.c, this.ctr.getShop())};
   }
 
   @Override
   public String toString() { 
     return String.format("%s: %s service done (by %s)", 
-        super.toString(), c, c.getCounter()); 
+        super.toString(), c, this.ctr); 
   }
 }

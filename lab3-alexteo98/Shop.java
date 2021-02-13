@@ -16,6 +16,9 @@ class Shop {
   /** Queue object belonging to specific shop */
   private Queue q;
 
+  /** Empty Event to return. */
+  private Event[] emptyEvent = new Event[] {};
+
   // ----- Constructors --------------------
 
   /**
@@ -79,57 +82,118 @@ class Shop {
     return null;
   }
 
-  /**
-   * Checks if there are any available counters in the shop.
-   *
-   * @return True if there is an available counter for use, false otherwise.
-   */
-  public boolean counterAvailable() { 
-    Counter ctr = getAvailableCounter();
-    if (ctr == null) { 
+  public boolean isShopFull() { 
+    if (this.q.isFull()) { 
       return false;
-    } else  { 
+    } else { 
       return true;
     }
   }
 
-  /**
-   * Initialise an array of counters.
-   *
-   * @param noOfCounters Number of Counter objects to create.
-   *
-   * @return An array of counters belonging to the shop.
-   */
-  private Counter[] createCounters(int noOfCounters) {
-    Counter[] allCounters = new Counter[noOfCounters];
-    for (int i = 0; i < noOfCounters; i++) { 
-      allCounters[i] = new Counter();
-    }
-    return allCounters;
+  public Event[] customerLeft(Customer c, Counter ctr) { 
+      
+    Customer nextCustomer = (Customer) this.q.deq();
+    Event[] nextEvent = ctr.nextCustomer();
+    return new Event[] {nextEvent[0], new JoinQueueEvent(nextCustomer, ctr.getQueue())};
   }
 
-  /**
-   * Initialise an array of customers.
-   *
-   * @param noOfCustomers Number of Customer objects to create.
-   * @param timings An containing the arrival and service time of each customer.
-   *
-   * @return An array of customers belonging to the shop.
-   */
-  private Customer[] createCustomers(int noOfCustomers, double[][] timings) { 
-    Customer[] allCustomers = new Customer[noOfCustomers];
-    for (int i = 0; i < noOfCustomers; i++) { 
-      allCustomers[i] = new Customer(timings[i][0], timings[i][1]);
+  public Event[] addCustomer(Customer c) { 
+
+    for (int i= 0;i<allCounters.length;i++) { 
+      if (allCounters[i].available()) { 
+        return new Event[] {new ServiceBeginEvent(c, allCounters[i])};
+      } else { /** not needed. */ }
     }
-    return allCustomers;
+    return new Event[] {new JoinQueueEvent(c, findQueueToQueue())};
+    /**
+      Counter c = findCounter();
+      if (c.available()) { 
+      return new Event[] {new ServiceBeginEvent(this.c, c)};
+      } else { 
+      c.getQueue().enq(this.c);
+      return emptyEvent;
+      }*/
   }
 
-  /**
-   * Dequeues and gets the next customer in queue.
-   *
-   * @return The next customer in line.
-   */
-  public Customer nextCustomer() { 
-    return (Customer) q.deq();
+  private Queue findQueueToQueue() { 
+    // all counters busy 
+    Counter c = allCounters[0];
+    for (int i=0;i<allCounters.length;i++) { 
+        if (c.compareTo(allCounters[i]) == 1) { 
+            c = allCounters[i];
+        } else {}
+    }
+
+    if (c.isCounterFull()){
+      return this.q;
+    } else { 
+        return c.getQueue();
+    }
   }
+
+/**
+ * Checks if there are any available counters in the shop.
+ *
+ * @return True if there is an available counter for use, false otherwise.
+ */
+public boolean counterAvailable() { 
+  Counter ctr = getAvailableCounter();
+  if (ctr == null) { 
+    return false;
+  } else  { 
+    return true;
+  }
+}
+
+/**
+ * Initialise an array of counters.
+ *
+ * @param noOfCounters Number of Counter objects to create.
+ *
+ * @return An array of counters belonging to the shop.
+ */
+private Counter[] createCounters(int noOfCounters) {
+  Counter[] allCounters = new Counter[noOfCounters];
+  for (int i = 0; i < noOfCounters; i++) { 
+    allCounters[i] = new Counter(this);
+  }
+  return allCounters;
+}
+
+/**
+ * Initialise an array of customers.
+ *
+ * @param noOfCustomers Number of Customer objects to create.
+ * @param timings An containing the arrival and service time of each customer.
+ *
+ * @return An array of customers belonging to the shop.
+ */
+private Customer[] createCustomers(int noOfCustomers, double[][] timings) { 
+  Customer[] allCustomers = new Customer[noOfCustomers];
+  for (int i = 0; i < noOfCustomers; i++) { 
+    allCustomers[i] = new Customer(timings[i][0], timings[i][1]);
+  }
+  return allCustomers;
+}
+
+/**
+ * Dequeues and gets the next customer in queue.
+ *
+ * @return The next customer in line.
+ */
+public Customer nextCustomer() { 
+  return (Customer) q.deq();
+}
+
+public Event[] customerDeparted(Counter ctr) { 
+  if (ctr.getQueue().isEmpty()) { 
+      return emptyEvent;
+  } else {
+    Event[] nextEvent = ctr.nextCustomer();
+  Customer nextInCounter = (Customer) ctr.getQueue().deq();
+  Customer nextInShop = (Customer) this.q.deq();
+  ctr.getQueue().enq(nextInShop);
+  return nextEvent;
+  }
+}
 }

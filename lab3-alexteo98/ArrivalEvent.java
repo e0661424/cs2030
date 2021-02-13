@@ -34,17 +34,12 @@ class ArrivalEvent extends Event {
   }
 
   public Event[] simulate() { 
-    if (shop.counterAvailable()) { 
-      return serve();
-    } else {
-      if (shop.getQueue().isFull()) { 
+    if (this.shop.isShopFull()) { 
         return depart();
-      } else { 
-        return joinQ();
-      }
+    } else  { 
+        return this.shop.addCustomer(this.c);
     }
   }
-
   /**
    * Prints a line that Customer has joined queue and enqueues customer into shop queue.
    *
@@ -61,7 +56,7 @@ class ArrivalEvent extends Event {
    */
   private Event[] serve() { 
     c.setCounter(shop.getAvailableCounter());
-    return new Event[] { new ServiceBeginEvent(this.c, this.shop)};
+    return this.shop.addCustomer(this.c);
   }
 
   /**

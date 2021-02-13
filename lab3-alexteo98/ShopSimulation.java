@@ -50,7 +50,8 @@ class ShopSimulation extends Simulation {
 
     this.noOfCustomers = sc.nextInt();
     this.noOfCounters = sc.nextInt();
-    this.queueLen = sc.nextInt();
+    this.counterQueueLength = sc.nextInt();
+    this.shopQueueLength = sc.nextInt();
 
     initEvents = new Event[noOfCustomers];
 
