@@ -33,10 +33,11 @@ class Counter implements Comparable<Counter> {
    * Initialise counter ID for current Counter object.
    * Sets up counter ID for next instantiation of Counter object.
    */
-  public Counter(Shop shop) { 
+  public Counter(Shop shop, int queueLength) { 
     counterID = lastCounterID;
     lastCounterID++;
     this.shop = shop;
+    this.q = new Queue<Customer> (queueLength);
   }
 
   // ----- Getters and Setters ----------------------

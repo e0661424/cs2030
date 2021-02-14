@@ -65,6 +65,7 @@ class Queue<T> {
     if (this.isEmpty()) {
       return null;
     }
+    @SuppressWarnings("unchecked")
     T item = (T) this.items[this.first];
     this.first = (this.first + 1) % this.maxSize;
     this.len -= 1;

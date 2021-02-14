@@ -24,7 +24,9 @@ class ShopSimulation extends Simulation {
   private Queue q;
 
   /** Max length of queue allowed in shop.*/
-  private int queueLen;
+  private int shopQueueLength;
+
+  private int counterQueueLength;
 
   /** Number of Customers to be instantiated. */
   private int noOfCustomers = 0;
@@ -56,8 +58,8 @@ class ShopSimulation extends Simulation {
     initEvents = new Event[noOfCustomers];
 
     createTimings(sc);
-    q = new Queue(queueLen);
-    shop = new Shop(noOfCustomers, noOfCounters, timings);
+    this.q = new Queue(shopQueueLength);
+    shop = new Shop(noOfCustomers, noOfCounters,counterQueueLength, shopQueueLength, timings);
     shop.setQueue(q);
     populateEvents();
   }

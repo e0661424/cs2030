@@ -14,10 +14,11 @@ class Shop {
   private Customer[] allCustomers;
 
   /** Queue object belonging to specific shop */
-  private Queue q;
+  private Queue<Customer> q;
 
   /** Empty Event to return. */
   private Event[] emptyEvent = new Event[] {};
+
 
   // ----- Constructors --------------------
 
@@ -31,11 +32,13 @@ class Shop {
    * @param timings Array used to store arrival and service time of customers.
    */
 
-  public Shop(int noOfCustomers, int noOfCounters, double[][] timings) { 
-    this.allCounters = createCounters(noOfCounters);
+  public Shop(int noOfCustomers, int noOfCounters, int counterQueueLength, int shopQueueLength, double[][] timings) { 
+    this.allCounters = createCounters(noOfCounters, counterQueueLength);
     this.allCustomers = createCustomers(noOfCustomers, timings);
     this.noOfCustomers = noOfCustomers;
     this.noOfCounters = noOfCounters;
+
+
   }
 
   // ----- Getter and Setters ---------------------
@@ -152,10 +155,10 @@ public boolean counterAvailable() {
  *
  * @return An array of counters belonging to the shop.
  */
-private Counter[] createCounters(int noOfCounters) {
+private Counter[] createCounters(int noOfCounters, int counterQueueLength) {
   Counter[] allCounters = new Counter[noOfCounters];
   for (int i = 0; i < noOfCounters; i++) { 
-    allCounters[i] = new Counter(this);
+    allCounters[i] = new Counter(this, counterQueueLength);
   }
   return allCounters;
 }
